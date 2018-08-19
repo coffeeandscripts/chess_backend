@@ -18,6 +18,34 @@ class Board:
     def __str__(self):
         return self.print_top_line() + self.print_board() + self.print_bottom_line()
 
+    def move(self, start, finish, user):
+        x_start = int(ord(start[0].lower())-97)
+        y_start = 8-int(start[1])
+        x_finish = int(ord(finish[0].lower())-97)
+        y_finish = 8-int(finish[1])
+        piece = self.board[y_start][x_start]
+        if x_start == x_finish and y_start == y_finish:
+            return 0 
+        if piece != " " and piece.check_movement((y_start, x_start), (y_finish, x_finish), self):
+            if user != piece.user:
+                return 0
+            self.board[y_finish][x_finish] = self.board[y_start][x_start]
+            self.board[y_start][x_start] = " "
+            return 1
+        else:
+            return 0
+
+    def occupied(self, enemy, y, x, user):
+        occupied = True
+        piece = self.board[y][x]
+        if piece != " ":
+            if enemy:
+                if piece.user == user:
+                    occupied = False
+        else:
+            occupied = False
+        return occupied
+
     def print_top_line(self):
         return ("     A   B   C   D   E   F   G   H\n   +-------------------------------+\n")
 
