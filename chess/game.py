@@ -18,3 +18,14 @@ class Game:
 
     def __str__(self):
         return ("Chess: game started at " + str(self.start_time))
+
+    def print_help(self):
+        print("Chess: backend")
+        print("Pieces:")
+        print("* lowercase letters are the opponent, you are the uppercase letters")
+        print("P - pawn")
+        print("H - castle")
+        print("Y - knight")
+        print("B - bishop")
+        print("Q - queen")
+        print("K - king")
